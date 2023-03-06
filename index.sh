@@ -2,4 +2,7 @@
 #MAIN SCRIPT FILE
 
 
-echo "Bash script"
+source ./_files/modules/Main.sh
+
+
+printMainMenu
