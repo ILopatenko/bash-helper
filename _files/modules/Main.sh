@@ -5,6 +5,7 @@ source ./_files/helpers/colors.sh
 source ./_files/helpers/menu.sh
 source ./_files/helpers/actions.sh
 source ./_files/helpers/questions.sh
+source ./_files/modules/Connection.sh
 
 
 printMainMenu(){
