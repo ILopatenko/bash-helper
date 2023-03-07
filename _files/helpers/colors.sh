@@ -41,6 +41,7 @@ BlackB="\e[40m"
 
 #EFFECTS
 reset="\e[0m"
+resBlink="\e[25m"
 bold="\e[1m"
 underlined="\e[4m"
 blink="\e[5m"
@@ -58,3 +59,5 @@ successAction=${GreenLT}${bold}
 faultAction=${RedLT}${bold}
 information=${YellowT}${bold}
 logInfo=${BlueT}${bold}
+userInput=${CyanLT}${bold}
+serverOutput=${WhiteLT}${bold}

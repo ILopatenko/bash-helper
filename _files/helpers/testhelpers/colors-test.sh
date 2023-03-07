@@ -41,6 +41,7 @@ testTextBackgroundCombinations(){
    done
 }
 
+testTextColors
 testTextBackgroundCombinations
 
 
