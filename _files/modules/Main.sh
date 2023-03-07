@@ -33,11 +33,14 @@ mainMenuQuestions(){
    do
    echo -e "${question}"
    read -p " THE NEXT ACTION IS: " answer
+   echo -e "${information}"
    case $answer in
-   1) responceToChoose "$ansmi01";sleep 1;updateUpgrade;clear -x;printMainMenu;;
-   2) responceToChoose "$ansmi02";sleep 1;printConnectionMenu;clear -x;printMainMenu;;
-   q|Q) exit;;
-   *) echo -e "${error}$answer is a wrong selection";sleep 1;clear -x;printMainMenu;;
+   1|U|u|update|UPDATE) responceToChoose "$ansmi01";sleep 1;updateUpgrade;clear -x;printMainMenu;;
+   2|C|c|connect|CONNECT) responceToChoose "$ansmi02";sleep 1;printConnectionMenu;clear -x;printMainMenu;;
+   q|Q|quit|exit) exit;;
+   *) echo -e "${faultAction}${blink}$answer IS A WRONG SELECTION.${resBlink} \n
+   ${information}TRY TO USE:\n${successAction}   ${underlined}1 (U, UPDATE)${resUnd}${information} - IF YOU WANT TO UPDATE AND UPGRADE THIS MACHINE\n
+${successAction}   ${underlined}2 (C, CONNECT)${resUnd}${information} - IF YOU WANT TO CONNECT TO THE ONE OF YOUR SERVERS";sleep 3;clear -x;    printMainMenu;;
 esac
 done
 

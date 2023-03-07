@@ -13,12 +13,12 @@ askUserInput(){
 
 
 responceToChoose(){
-   echo -e "${successAction}YES. Let's $1${information}"
+   echo -e "${successAction}YES. Let's $1${information}${reset}"
    sleep 0.2
 }
 
 rejectedChoose(){
-   echo -e "${faultAction}NO. Let's just skip this step"
+   echo -e "${faultAction}NO. Let's just skip this step${reset}"
    sleep 0.2
 }
 
