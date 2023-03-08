@@ -54,13 +54,13 @@ installGitLabServer(){
 
 generalTools(){
    sudo apt install openssh-server git nano wget tar htop nfs-common p7zip-full gpg -y
-   finished
 }
 
 dockerStack(){
    wget https://gitlab.com/bmcgonag/docker_installs/-/raw/main/install_docker_nproxyman.sh
    chmod +X install_docker_nproxyman.sh
    bash install_docker_nproxyman.sh
+   sudo rm install_docker_nproxyman.sh
 }
 
 
@@ -78,25 +78,14 @@ netmakerClient(){
 
 updateUpgradeSilent(){
    updateUpgrade &> /dev/null
-   finished
 }
 
-
-exitIfRoot(){
-   if [[ $USER == "root" ]]; then
-   echo -e "${error}Please run this script as non root user!"
-   echo -e "${info}bash $0"
-   exit
-   else currentUser=$USER
-   fi
-}
 
 
 #LOCAL DISKS
 #2TER, 860, 970-rest
 
 checkFolderStorage(){
-   exitIfRoot
    if [ -d "/home/$USER/Storage" ]; then
       echo -e "${info} folder /home/$USER/Storage exists!"
    else
