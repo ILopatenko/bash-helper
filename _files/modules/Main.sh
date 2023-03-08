@@ -6,6 +6,7 @@ source ./_files/helpers/menu.sh
 source ./_files/helpers/actions.sh
 source ./_files/helpers/questions.sh
 source ./_files/modules/Connection.sh
+source ./_files/modules/Server.sh
 
 
 printMainMenu(){
@@ -20,7 +21,8 @@ mi01="UPDATE AND UPGRADE   "
 ansmi01="update and upgrade your system"
 mi02="CONNECT TO THE SERVER"
 ansmi02="connect to one of your servers"
-mi03="${GrayT}       RESERVED      "
+mi03="SETUP THE SERVER     "
+ansmi03="setup your server"
 mi04="${GrayT}       RESERVED      "
 mi05="${GrayT}       RESERVED      "
 mi06="${GrayT}       RESERVED      "
@@ -37,6 +39,7 @@ mainMenuQuestions(){
    case $answer in
    1|U|u|update|UPDATE) responceToChoose "$ansmi01";sleep 1;updateUpgrade;clear -x;printMainMenu;;
    2|C|c|connect|CONNECT) responceToChoose "$ansmi02";sleep 1;printConnectionMenu;clear -x;printMainMenu;;
+   3|S|s|server|SERVER) responceToChoose "$ansmi03";sleep 1;printServerMenu;clear -x;printMainMenu;;
    q|Q|quit|exit) exit;;
    *) echo -e "${faultAction}${blink}$answer IS A WRONG SELECTION.${resBlink} \n
    ${information}TRY TO USE:\n${successAction}   ${underlined}1 (U, UPDATE)${resUnd}${information} - IF YOU WANT TO UPDATE AND UPGRADE THIS MACHINE\n
