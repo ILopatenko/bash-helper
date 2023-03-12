@@ -49,7 +49,7 @@ resUnd="\e[24m"
 
 
 #PRESETS
-frame=${MagentaLT}${bold}${GreenB}${BlackB}
+frame=${MagentaLT}${bold}${BlackB}
 li=${WhiteLT}${bold}
 olTitle=${YellowLT}${bold}${underlined}
 reserved=${GrayDT}
