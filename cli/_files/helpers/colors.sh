@@ -52,3 +52,5 @@ menuT=${YellowLT}${underlined}
 frame=${MagentaLT}${BlackB}
 innerBG=${CyanB}
 menuItem=${WhiteLT}
+
+RESERVED="${GrayDT}${underlined}X.      RESERVED        ${resUnd}${innerBG}" 

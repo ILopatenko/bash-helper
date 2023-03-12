@@ -4,29 +4,22 @@
 source ./_files/helpers/colors.sh
 
 
-   emptyOuterLine="${mainBG}                                                "
-       borderLine="   ${frame} **************************************** ${mainBG}   "
-   emptyInnerLine="   ${frame} * ${innerBG}                                    ${frame} * ${mainBG}   "
-         
-menuTitle="TITLE 15 SYMBOL"
-textContent="THIS IS AN EXAMPLE OF 25"
+printEmptyOuterLine(){
+   echo -e "${mainBG}                                                "
+}
+printBorderLine(){
+   echo -e "   ${frame} **************************************** ${mainBG}   "
+}
+printEmptyInnerLine(){
+   echo -e "   ${frame} * ${innerBG}                                    ${frame} * ${mainBG}   "
+}
+printTextLine(){
+   echo -e "   ${frame} * ${innerBG}      ${menuItem}$1      ${frame} * ${mainBG}   "
+}
 
-   printEmptyOuterLine(){
-      echo -e "$emptyOuterLine"
-   }
-   printBorderLine(){
-      echo -e "$borderLine"
-   }
-   printEmptyInnerLine(){
-      echo -e "$emptyInnerLine"
-   }
-   printTextLine(){
-      echo -e "   ${frame} * ${innerBG}      ${menuItem}$1      ${frame} * ${mainBG}   "
-   }
-
-   printMenuTitle(){
-      echo -e "   ${frame} * ${innerBG}           ${menuT}$1${resUnd}${innerBG}          ${frame} * ${mainBG}   "
-   }
+printMenuTitle(){
+   echo -e "   ${frame} * ${innerBG}           ${menuT}$1${resUnd}${innerBG}          ${frame} * ${mainBG}   "
+}
 
 
 
@@ -49,9 +42,4 @@ printMenu(){
    printBorderLine
    printEmptyOuterLine
    echo -e "${reset}"
-}
-
-
-printMainMenu(){
-   printMenu "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
 }
