@@ -6,4 +6,4 @@ source ./_files/modules/Main.sh
 
 
 
-printMainMenu
+mainMenu

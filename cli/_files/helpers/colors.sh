@@ -54,3 +54,10 @@ innerBG=${CyanB}
 menuItem=${WhiteLT}
 
 RESERVED="${GrayDT}${underlined}X.      RESERVED        ${resUnd}${innerBG}" 
+
+choose=${MagentaLT}${bold}
+confirmation=${YellowLT}${bold}
+
+error=${RedLT}${bold}
+info=${YellowLT}${bold}
+good=${GreenLT}${bold}
