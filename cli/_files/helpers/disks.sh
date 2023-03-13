@@ -85,7 +85,7 @@ connectAll(){
 
 #MAIN FUNCTION!
 connectDisks(){
-   if checkIfCurrentUserIsRoot; then
+   if checkIfCurrentUserIsNotRoot; then
       #Check if /home/$USER/Storage folder exists. If  doesn't - create
       checkFolderStorage
       #Ask user to connect all the disks. Y - invokes connectAll() and N - invokes localDisks()

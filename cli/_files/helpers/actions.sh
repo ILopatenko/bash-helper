@@ -61,7 +61,7 @@ netmakerClient(){
 }
 
 
-checkIfCurrentUserIsRoot(){
+checkIfCurrentUserIsNotRoot(){
    if [[ $(whoami) == 'root' ]]; then
       return 1
    else
@@ -71,10 +71,8 @@ checkIfCurrentUserIsRoot(){
 
 rootRule(){
    if checkIfCurrentUserIsRoot; then
-      echo "NO. You aren't ROOT"
       $1
    else
-      echo "YES. You are ROOT"
       $2
    fi
 }

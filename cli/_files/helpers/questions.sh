@@ -17,6 +17,11 @@ reportOK(){
    sleep 1
 }
 
+provideInfo(){
+   echo -e "${info}$1!"
+   sleep 1
+}
+
 askYesNoQuestion(){
    echo -e "${choose}"
    while true; do
