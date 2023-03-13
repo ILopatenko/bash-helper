@@ -5,6 +5,7 @@ source ./_files/helpers/menu.sh
 source ./_files/helpers/colors.sh
 source ./_files/helpers/questions.sh
 source ./_files/helpers/actions.sh
+source ./_files/helpers/disks.sh
 
 
 menuTitle4=" =  DESKTOP  = "
@@ -51,7 +52,7 @@ desktopMenuQuestions(){
    3|S|s) 
    confirmation "$confMI43";
    wait1;
-   connectNFSshares;
+   connectDisks;
    clear -x;
    desktopMenu;;
 

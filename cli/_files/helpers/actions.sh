@@ -51,79 +51,6 @@ bigSoft(){
    sudo add-apt-repository ppa:thopiekar/openrgb -y && sudo apt update && sudo apt install openrgb -y
 }
 
-connectNFSshares(){
-   checkFolderStorage
-   createFolderForMount
-   askYesNoQuestionWithActions "connect all the local Disks and LAN NFSs" connectAll
-   askYesNoQuestionWithActions "connect all the local Disks" connectLocal
-   askYesNoQuestionWithActions "connect all the NFSs" connectNFS
-   askYesNoQuestionWithActions "connect only common share ryzen2ter" connectRyzen2ter
-}
-
-
-checkFolderStorage(){
-   if [ -d "/home/$USER/Storage" ]; then
-      echo -e "${info} folder /home/$USER/Storage exists!"
-   else
-      echo -e "${info} trying to create /home/$USER/Storage"
-      mkdir "/home/$USER/Storage"
-      if [ -d "/home/$USER/Storage" ]; then
-         echo -e "${good} folder /home/$USER/Storage was created!"
-      else
-         echo -e "${error} can not create folder /home/$USER/Storage!" 
-      fi
-   fi
-}
-
-createFolderForMount(){
-   if [ -d "/home/$USER/Storage/$1" ]; then
-   echo -e "${info} folder /home/$USER/Storage/$1 exists!"
-   else
-   echo -e "${info} trying to create /home/$USER/Storage/$1"
-      mkdir "/home/$USER/Storage/$1"
-      if [ -d "/home/$USER/Storage/$1" ]; then
-         echo -e "${good} folder /home/$USER/Storage/$1 was created!"
-      else
-         echo -e "${error} can not create folder /home/$USER/Storage/$1!" 
-      fi
-   fi
-
-}
-
-connectLocal(){
-   createFolderForMount "2TER"
-   createFolderForMount "860"
-   createFolderForMount "970-rest"
-   sudo bash ./_files/helpers/fstab.sh $USER "local"
-}
-
-connectNFS(){
-   checkFolderStorage
-   createFolderForMount "ryzen2ter"
-   createFolderForMount "ryzen4ter"
-   createFolderForMount "ssdIT"
-   createFolderForMount "ssdMedia"
-   sudo bash ./_files/helpers/fstab.sh $USER "lanNFSAll"
-}
-
-connectRyzen2ter(){
-   checkFolderStorage
-   createFolderForMount "ryzen2ter"
-   sudo bash ./_files/helpers/fstab.sh $USER "ryzen2ter"
-}
-
-connectAll(){
-   checkFolderStorage
-   createFolderForMount "2TER"
-   createFolderForMount "860"
-   createFolderForMount "970-rest"
-   createFolderForMount "ryzen2ter"
-   createFolderForMount "ryzen4ter"
-   createFolderForMount "ssdIT"
-   createFolderForMount "ssdMedia"
-   sudo bash ./_files/helpers/fstab.sh $USER "all"
-   return 0
-}
 
 netmakerClient(){
    sudo curl -sL 'https://apt.netmaker.org/gpg.key' | sudo tee /etc/apt/trusted.gpg.d/netclient.asc
@@ -132,3 +59,23 @@ netmakerClient(){
    sudo sudo apt install netclient -y
    sudo ip -br -c a
 }
+
+
+checkIfCurrentUserIsRoot(){
+   if [[ $(whoami) == 'root' ]]; then
+      return 1
+   else
+      return 0
+   fi
+}
+
+rootRule(){
+   if checkIfCurrentUserIsRoot; then
+      echo "NO. You aren't ROOT"
+      $1
+   else
+      echo "YES. You are ROOT"
+      $2
+   fi
+}
+
