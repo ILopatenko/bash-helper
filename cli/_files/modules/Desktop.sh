@@ -68,13 +68,13 @@ desktopMenuQuestions(){
    *) echo -e "
    ${error}${blink}$answer IS A WRONG SELECTION.${resBlink} \n
    ${info}TRY TO USE:\n
-   ${good}   ${underlined}1 OR U${resUnd}${info} - IF YOU WANT TO UPDATE AND UPGRADE THIS MACHINE
-   ${good}   ${underlined}2 OR C${resUnd}${info} - IF YOU WANT TO CONNECT TO THE ONE OF YOUR SERVERS
-   ${good}   ${underlined}3 OR S${resUnd}${info} - IF YOU WANT TO SETUP YOUR UBUNTU SERVER
-   ${good}   ${underlined}4 OR D${resUnd}${info} - IF YOU WANT TO SETUP YOUR UBUNTU/LINUX MINT DESKTOP/LAPTOP";
+   ${good}   ${underlined}1 OR U${resUnd}${info} - IF YOU WANT TO INSTALL ESSENTIAL TOOLS
+   ${good}   ${underlined}2 OR C${resUnd}${info} - IF YOU WANT TO INSTALL BIG SOFT
+   ${good}   ${underlined}3 OR S${resUnd}${info} - IF YOU WANT TO CONNECCT DISKS
+   ${good}   ${underlined}4 OR D${resUnd}${info} - IF YOU WANT TO INSTALL NETMAKER VPN CLIENT";
    sleep 4;
    clear -x;
-   mainMenu;;
+   desktopMenu;;
    esac
    done
 }

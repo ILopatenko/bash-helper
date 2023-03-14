@@ -76,7 +76,7 @@ connectionMenuQuestions(){
    ${good}   ${underlined}4 OR D${resUnd}${info} - IF YOU WANT TO SETUP YOUR UBUNTU/LINUX MINT DESKTOP/LAPTOP";
    sleep 4;
    clear -x;
-   mainMenu;;
+   connectionMenu;;
    esac
    done
 }
