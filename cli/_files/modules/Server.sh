@@ -11,19 +11,19 @@ source ./_files/modules/Connection.sh
 
 menuTitle3="= SERVER MENU ="
 
-menuItem31="1. INSTALL ESSENTIAL SOFT   "
+menuItem31="1.INSTALL ESSENTIAL SOFT"
 confMI31="install all the essential tools (openssh-server git nano wget tar htop nfs-common gpg)"
 
-menuItem32="2. SETUP NEW NETMAKER SERVER"
+menuItem32="2. SETUP NETMAKER SERVER" 
 confMI32="install Netmaker VPN Server"
 
-menuItem33="3. SETUP NEW NGINX SERVER   "
+menuItem33="3. SETUP NGINX SERVER   "
 confMI33="install NginX Server and Netmaker Client"
 
-menuItem34="4. INSTALL DOCKER STACK     "
+menuItem34="4. INSTALL DOCKER STACK "
 confMI34="install Docker Stack (Docker, Docker-Compose, NginX, Portainer and Navidrome)"
 
-menuItem35="5. INSTALL NETMAKER CLIENT  "
+menuItem35="5. INSTALL NETMAKER CL. "
 confMI35="install Netmaker VPN Client"
 
 
@@ -49,7 +49,7 @@ serverMenuQuestions(){
    2|NM|nm)
    confirmation "$confMI32";
    wait1;
-   setupNetmaker;
+   netmakerServer;
    clear -x;
    serverMenu;;
 

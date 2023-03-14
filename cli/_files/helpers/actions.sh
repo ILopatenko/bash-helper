@@ -60,6 +60,19 @@ netmakerClient(){
    sudo ip -br -c a
 }
 
+netmakerServer(){
+   sudo wget -qO /root/nm-quick-interactive.sh https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick-interactive.sh && sudo chmod +x /root/nm-quick-interactive.sh && sudo /root/nm-quick-interactive.sh
+}
+
+dockerStack(){
+   wget https://gitlab.com/bmcgonag/docker_installs/-/raw/main/install_docker_nproxyman.sh
+   chmod +X install_docker_nproxyman.sh
+   bash install_docker_nproxyman.sh
+   sudo rm install_docker_nproxyman.sh
+}
+
+
+
 
 checkIfCurrentUserIsNotRoot(){
    if [[ $(whoami) == 'root' ]]; then
