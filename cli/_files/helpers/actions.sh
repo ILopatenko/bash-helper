@@ -90,3 +90,9 @@ rootRule(){
    fi
 }
 
+dockerAppsStack1(){
+   mkdir -p ~/docker-apps-stack/wbo/wbo-boards
+   cp ./_files/docker-apps/x-all/docker-compose.yml ../../docker-apps-stack
+   cd ../../docker-apps-stack
+   sudo docker-compose up -d
+}

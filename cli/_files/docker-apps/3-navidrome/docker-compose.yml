@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    restart: unless-stopped
+    ports:
+      - "5001:4533"
+    environment:
+      ND_SCANINTERVAL: 30m
+      ND_LOGLEVEL: info
+      ND_BASEURL: ""
+    volumes:
+      - "./data:/data"
+      - "/home/slon/Storage/ryzen2ter/_share/_mp3:/music:ro"

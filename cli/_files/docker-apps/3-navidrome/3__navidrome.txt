@@ -1,0 +1,22 @@
+
+sudo mkdir -p ~/docker/navidrome
+cd ~/docker/navidrome
+sudo touch docker-compose.yml
+sudo chmod 777 docker-compose.yml
+sudo echo '
+version: "3.8"
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    restart: unless-stopped
+    ports:
+      - "4533:4533"
+    environment:
+      ND_SCANINTERVAL: 30m
+      ND_LOGLEVEL: info
+      ND_BASEURL: ""
+    volumes:
+      - "./data:/data"
+      - "/home/slon/Storage/ryzen2ter/_share/_mp3:/music:ro"
+' > docker-compose.yml
+sudo docker-compose up -d

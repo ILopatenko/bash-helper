@@ -1,0 +1,32 @@
+docker run -p 5000:5000 -d --name whoogle benbusby/whoogle-search:latest
+
+
+
+sudo mkdir -p ~/docker/whoogle
+cd ~/docker/whoogle
+sudo touch docker-compose.yml
+sudo chmod 777 docker-compose.yml
+sudo echo '
+version: "3.8"
+
+services:
+  whoogle-search:
+    image: benbusby/whoogle-search
+    container_name: whoogle
+    restart: unless-stopped
+    pids_limit: 50
+    mem_limit: 256mb
+    memswap_limit: 256mb
+    user: whoogle
+    security_opt:
+      - no-new-privileges
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /config/:size=10M,uid=927,gid=927,mode=1700
+      - /var/lib/tor/:size=15M,uid=927,gid=927,mode=1700
+      - /run/tor/:size=1M,uid=927,gid=927,mode=1700
+    ports:
+      - 5000:5000
+' > docker-compose.yml
+sudo docker-compose up -d

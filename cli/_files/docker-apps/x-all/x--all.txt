@@ -1,0 +1,61 @@
+
+
+mkdir -p ~/docker-apps-stack/wbo/wbo-boards
+cd docker-apps-stack
+echo '
+version: "3.8"
+
+services:
+  whoogle-search:
+    image: benbusby/whoogle-search
+    container_name: whoogle
+    restart: unless-stopped
+    pids_limit: 50
+    mem_limit: 256mb
+    memswap_limit: 256mb
+    user: whoogle
+    security_opt:
+      - no-new-privileges
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /config/:size=10M,uid=927,gid=927,mode=1700
+      - /var/lib/tor/:size=15M,uid=927,gid=927,mode=1700
+      - /run/tor/:size=1M,uid=927,gid=927,mode=1700
+    ports:
+      - 5000:5000
+
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    restart: unless-stopped
+    ports:
+      - "5001:4533"
+    environment:
+      ND_SCANINTERVAL: 30m
+      ND_LOGLEVEL: info
+      ND_BASEURL: ""
+    volumes:
+      - "./data:/data"
+      - "/home/slon/Storage/ryzen2ter/_share/_mp3:/music:ro"
+
+  drawio:
+    image: jgraph/drawio
+    container_name: drawio
+    restart: unless-stopped
+    ports:
+      - 5002:8080
+      - 5003:8443
+
+  wbo:
+    ports:
+      - '5004:80'
+    volumes:
+      - '/home/slon/docker-apps-stack/wbo/wbo-boards:/opt/app/server-data'
+    image: 'lovasoa/wbo:latest'
+    container_name: wbo
+    restart: unless-stopped
+
+' >> docker-compose.yml
+
+docker-compose up -d

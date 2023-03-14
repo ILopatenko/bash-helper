@@ -26,9 +26,12 @@ confMI34="install Docker Stack (Docker, Docker-Compose, NginX, Portainer and Nav
 menuItem35="5. INSTALL NETMAKER CL. "
 confMI35="install Netmaker VPN Client"
 
+menuItem36="6. INSTALL DOCKER-APPS-1"
+confMI36="install Docker Stack Apps 1 kit (Whoogle, Navidrome, WBO, Draw.io)"
+
 
 printServerMenu(){
-   printMenu "${menuTitle3}" "${menuItem31}" "${menuItem32}" "${menuItem33}" "${menuItem34}" "${menuItem35}" "${RESERVED}"  "${RESERVED}"
+   printMenu "${menuTitle3}" "${menuItem31}" "${menuItem32}" "${menuItem33}" "${menuItem34}" "${menuItem35}" "${menuItem36}"  "${RESERVED}"
 }
 
 serverMenuQuestions(){
@@ -74,6 +77,13 @@ serverMenuQuestions(){
    clear -x;
    serverMenu;;
 
+   6|DA|da)
+   confirmation "$confMI36";
+   wait1;
+   dockerAppsStack1;
+   clear -x;
+   serverMenu;;
+
    q|Q) exit;;
 
    *) echo -e "
@@ -83,7 +93,8 @@ serverMenuQuestions(){
    ${good}   ${underlined}2 OR NM${resUnd}${info} - IF YOU WANT TO SETUP NETMAKER SERVER
    ${good}   ${underlined}3 OR NX${resUnd}${info} - IF YOU WANT TO SETUP NGINX SERVER
    ${good}   ${underlined}4 OR D${resUnd}${info} - IF YOU WANT TO INSTALL DOCKER STACK
-   ${good}   ${underlined}5 OR D${resUnd}${info} - IF YOU WANT TO INSTALL NETMAKET CLIENT";
+   ${good}   ${underlined}5 OR NC${resUnd}${info} - IF YOU WANT TO INSTALL NETMAKET CLIENT
+   ${good}   ${underlined}6 OR DA${resUnd}${info} - IF YOU WANT TO INSTALL DOCKER APPS STACK";
    sleep 4;
    clear -x;
    serverMenu;;
