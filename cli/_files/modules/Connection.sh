@@ -39,7 +39,7 @@ connectionMenuQuestions(){
    1|PS|ps) 
    confirmation "$confMI21";
    wait1; 
-   desktopTools;
+   connectToLan;
    clear -x; 
    connectionMenu;;
 

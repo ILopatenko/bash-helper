@@ -45,3 +45,8 @@ askYesNoQuestionWithActions(){
       $3
    fi
 }
+
+askUserInput(){
+   read -p "$1" ans
+   echo $ans
+}

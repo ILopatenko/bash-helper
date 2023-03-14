@@ -9,6 +9,12 @@ connection(){
    ssh -o StrictHostKeyChecking=no -i $1 -t ubuntu@$2 $3
 }
 
+connectionHelper(){
+   path=$1
+   keyName=$(find $path -name "*.key")
+   ssh -o StrictHostKeyChecking=no -i $keyName -t $2@$3 $4 
+}
+
 prepareConnection(){
    clear -x
    path="/home/$USER/Storage/ssdIT/_SSH-keys/myOracle/$1/"
@@ -31,4 +37,10 @@ connectToOracle(){
    echo -e "${info}Step 3 - clone my repo with this script:"
    echo -e "${error}git clone https://github.com/ilopatenko/bash-helper && sudo reboot${menuItem}"
    connection "$keyName" "$serverIP"
+}
+
+connectToLan(){
+   echo -e "${choose}"
+   lanIP="192.168.0.$(askUserInput "Enter the last part of LAN server IP: 192.168.0.")"
+   connectionHelper "/home/$USER/Storage/ssdIT/_SSH-keys/lan/" $USER "$lanIP"
 }
