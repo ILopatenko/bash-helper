@@ -7,6 +7,7 @@ source ./_files/helpers/questions.sh
 source ./_files/helpers/actions.sh
 source ./_files/modules/Desktop.sh
 source ./_files/modules/Connection.sh
+source ./_files/modules/Server.sh
 
 
 menuTitle0=" = MAIN MENU = "
