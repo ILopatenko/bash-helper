@@ -63,7 +63,7 @@ serverMenuQuestions(){
    4|D|d)
    confirmation "$confMI34";
    wait1;
-   setupDockerStack;
+   dockerStack;
    clear -x;
    serverMenu;;
 
