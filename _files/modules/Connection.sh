@@ -1,73 +1,88 @@
 #!/usr/bin/bash
-#CONNECTION MENU MODULE
+#CONNECTION MENU
 
-source ./_files/helpers/colors.sh
 source ./_files/helpers/menu.sh
-source ./_files/helpers/actions.sh
+source ./_files/helpers/colors.sh
 source ./_files/helpers/questions.sh
+source ./_files/helpers/actions.sh
+source ./_files/helpers/disks.sh
+source ./_files/helpers/connect.sh
+
+
+menuTitle2=" = CONNECTION ="
+
+menuItem21="1. SSH TO LAN PM SERVER "
+confMI21="connect to the LAN ProxMox Server"
+
+menuItem22="2. SSH TO NETMAKER SERV."
+confMI22="connect to the Netmaker VPN Oracle Cloud Server"
+
+menuItem23="3. SSH TO NGINX SERVER  "
+confMI23="connect to the Netmaker VPN Oracle Cloud Server"
+
+menuItem24="4. SSH TO ANY SERVER    "
+confMI24="connect to any Server"
 
 
 printConnectionMenu(){
-   printDefaultMenu7Lines "$mt2" "$mi21" "$mi22" "$mi23" "$mi24" "$mi25" "$mi26" "$mi27"
+   printMenu "${menuTitle2}" "${menuItem21}" "${menuItem22}" "${menuItem23}" "${menuItem24}" "${RESERVED}" "${RESERVED}"  "${RESERVED}"
+}
+
+connectionMenuQuestions(){
+  
+   while true
+   do
+   echo -e "${choose}"
+   read -p " I WOULD LIKE TO: " answer
+   case $answer in
+   
+   1|PS|ps) 
+   confirmation "$confMI21";
+   wait1; 
+   connectToLan;
+   clear -x; 
+   connectionMenu;;
+
+   2|nm|NM) 
+   confirmation "$confMI22";
+   wait1;
+   connectToOracle "netmaker";
+   clear -x;
+   connectionMenu;;
+
+   3|nx|NX) 
+   confirmation "$confMI23";
+   wait1;
+   connectToOracle "nginx";
+   clear -x;
+   connectionMenu;;
+
+   4|C|c)
+   confirmation "$confMI24";
+   wait1;
+   echo "This feature is in development ...";
+   sleep 2;
+   clear -x;
+   connectionMenu;;
+
+   q|Q) exit;;
+
+   *) echo -e "
+   ${error}${blink}$answer IS A WRONG SELECTION.${resBlink} \n
+   ${info}TRY TO USE:\n
+   ${good}   ${underlined}1 OR U${resUnd}${info} - IF YOU WANT TO UPDATE AND UPGRADE THIS MACHINE
+   ${good}   ${underlined}2 OR C${resUnd}${info} - IF YOU WANT TO CONNECT TO THE ONE OF YOUR SERVERS
+   ${good}   ${underlined}3 OR S${resUnd}${info} - IF YOU WANT TO SETUP YOUR UBUNTU SERVER
+   ${good}   ${underlined}4 OR D${resUnd}${info} - IF YOU WANT TO SETUP YOUR UBUNTU/LINUX MINT DESKTOP/LAPTOP";
+   sleep 4;
+   clear -x;
+   connectionMenu;;
+   esac
+   done
+}
+
+
+connectionMenu(){
+   printConnectionMenu
    connectionMenuQuestions
 }
-
-#CONNECTION MENU TITLE
-mt2="CONNECTION MENU${resUnd}      "
-#CONNECTION MENU LIST ITEMS
-mi21="PROXMOX LAN SERVER   "
-ansmi21="connect to your LAN ProxMox server"
-mi22="ORACLE CLOUD SERVER  "
-ansmi22="connect to your Cloud Oracle server"
-mi23="${GrayT}       RESERVED      "
-mi24="${GrayT}       RESERVED      "
-mi25="${GrayT}       RESERVED      "
-mi26="${GrayT}       RESERVED      "
-mi27="${information}       Q - EXIT      "
-
-ansmi221="connect to your NETMAKER Oracle Cloud Server"
-ansmi222="connect to your NGINX Oracle Cloud Server"
-
-
-
-#QUESTIONS BLOCK
-connectionMenuQuestions(){
-   while true
-   do
-   echo -e "${question}"
-   read -p " CHOSE THE CONNECTION TYPE: " answer
-   case $answer in
-   1|cp|CP|proxmox|PROXMOX) responceToChoose "$ansmi01";sleep 1;connectProxMoxServer;clear -x;printMainMenu;;
-   2|co|CO|oracle|ORACLE) responceToChoose "$ansmi02";sleep 1;connectOracleServer;clear -x;printMainMenu;;
-   q|Q) printMainMenu;;
-   *) echo -e "${faultAction}${blink}$answer IS A WRONG SELECTION.${resBlink} \n
-   ${information}TRY TO USE:\n${successAction}   ${underlined}1 (CP, PROXMOX)${resUnd}${information} - IF YOU WANT TO CONNECT TO YOUR LAN PROXMOX SERVER\n
-${successAction}   ${underlined}2 (CO, ORACLE)${resUnd}${information} - IF YOU WANT TO CONNECT TO YOUR ORACLE SERVER";sleep 3;clear -x;printConnectionMenu;;
-   esac
-   done
-
-}
-
-connectProxMoxServer(){
-   echo -e "${userInput}"
-   host="192.168.0.$(askUserInput "Please enter the last part of your server's IP: 192.168.0.")"
-   askYesNoQuestionWithActions "to prepare and perform your first connection to your LAN ProxMox server" "connectToProxmoxFirst $host" "connectToServer "test" $host"
-}
-
-connectOracleServer(){
-   while true
-   do
-   echo -e "${question}"
-   read -p " CHOSE THE SERVER (1 - NETMAKER, 2 - NGINX, Q - EXIT TO CONNECTION MENU): " answer
-   case $answer in
-   1|netmaker|NETMAKER) responceToChoose "$ansmi221";sleep 1;connectOracle "netmaker";clear -x;printMainMenu;;
-   2|nginx|NGINX) responceToChoose "$ansmi222";sleep 1;connectOracle "nginx";clear -x;printMainMenu;;
-   q|Q) printConnectionMenu;;
-   *) echo -e "${faultAction}${blink}$answer IS A WRONG SELECTION.${resBlink} \n
-   ${information}TRY TO USE:\n${successAction}   ${underlined}1 (NETMAKER)${resUnd}${information} - IF YOU WANT TO CONNECT TO YOUR NETMAKER ORACLE CLOUD SERVER\n
-${successAction}   ${underlined}2 (ORACLE)${resUnd}${information} - IF YOU WANT TO CONNECT TO YOUR NGINX ORACLE CLOUD SERVER";sleep 3;clear -x;connectOracleServer;;
-   esac
-   done
-
-}
-

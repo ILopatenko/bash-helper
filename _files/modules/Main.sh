@@ -1,50 +1,99 @@
 #!/usr/bin/bash
-#MAIN MENU MODULE
+#MAIN MENU
 
-source ./_files/helpers/colors.sh
 source ./_files/helpers/menu.sh
-source ./_files/helpers/actions.sh
+source ./_files/helpers/colors.sh
 source ./_files/helpers/questions.sh
+source ./_files/helpers/actions.sh
+source ./_files/modules/Desktop.sh
 source ./_files/modules/Connection.sh
 source ./_files/modules/Server.sh
 
 
+menuTitle0=" = MAIN MENU = "
+
+menuItem01="1. UPDATE AND UPGRADE OS"
+confMI01="update and upgrade your system"
+
+menuItem02="2. SSH TO REMOTE SERVER "
+confMI02="connect to your server via SSH"
+
+menuItem03="3. SETUP UBUNTU SERVER  "
+confMI03="setup your Ubuntu server"
+
+menuItem04="4. SETUP UBUNTU DESKTOP "
+confMI04="setup your Ununtu/Linux Mint Desktop/Laptop"
+
+menuItem05="5. INSTALL BIG PROJECTS "
+confMI05="install some big opensource projects (nextcloud, gitlab)"
+
+
 printMainMenu(){
-   printDefaultMenu7Lines "$mt0" "$mi01" "$mi02" "$mi03" "$mi04" "$mi05" "$mi06" "$mi07"
-   mainMenuQuestions
+   printMenu "${menuTitle0}" "${menuItem01}" "${menuItem02}" "${menuItem03}" "${menuItem04}" "${menuItem05}" "${RESERVED}"  "${RESERVED}"
 }
 
-#MAIN MENU TITLE
-mt0="MAIN MENU${resUnd}            "
-#MAIN MENU LIST ITEMS
-mi01="UPDATE AND UPGRADE   "
-ansmi01="update and upgrade your system"
-mi02="CONNECT TO THE SERVER"
-ansmi02="connect to one of your servers"
-mi03="SETUP THE SERVER     "
-ansmi03="setup your server"
-mi04="${GrayT}       RESERVED      "
-mi05="${GrayT}       RESERVED      "
-mi06="${GrayT}       RESERVED      "
-mi07="${information}       Q - EXIT      "
-
-
-#QUESTIONS BLOCK
 mainMenuQuestions(){
+
    while true
    do
-   echo -e "${question}"
-   read -p " THE NEXT ACTION IS: " answer
-   echo -e "${information}"
+   echo -e "${choose}"
+   read -p " I WOULD LIKE TO: " answer
    case $answer in
-   1|U|u|update|UPDATE) responceToChoose "$ansmi01";sleep 1;updateUpgrade;clear -x;printMainMenu;;
-   2|C|c|connect|CONNECT) responceToChoose "$ansmi02";sleep 1;printConnectionMenu;clear -x;printMainMenu;;
-   3|S|s|server|SERVER) responceToChoose "$ansmi03";sleep 1;printServerMenu;clear -x;printMainMenu;;
-   q|Q|quit|exit) exit;;
-   *) echo -e "${faultAction}${blink}$answer IS A WRONG SELECTION.${resBlink} \n
-   ${information}TRY TO USE:\n${successAction}   ${underlined}1 (U, UPDATE)${resUnd}${information} - IF YOU WANT TO UPDATE AND UPGRADE THIS MACHINE\n
-${successAction}   ${underlined}2 (C, CONNECT)${resUnd}${information} - IF YOU WANT TO CONNECT TO THE ONE OF YOUR SERVERS";sleep 3;clear -x;    printMainMenu;;
-esac
-done
+   
+   1|U|u) 
+   confirmation "$confMI01";
+   wait1; 
+   updateUpgrade;
+   clear -x; 
+   mainMenu;;
 
+   2|C|c) 
+   confirmation "$confMI02";
+   wait1;
+   connectionMenu;
+   clear -x;
+   mainMenu;;
+
+   3|S|s) 
+   confirmation "$confMI03";
+   wait1;
+   serverMenu;
+   clear -x;
+   mainMenu;;
+
+   4|D|d)
+   confirmation "$confMI04";
+   wait1;
+   desktopMenu;
+   clear -x;
+   mainMenu;;
+
+   5|B|b)
+   confirmation "$confMI05";
+   wait1;
+   bigProjectsMenu;
+   clear -x;
+   mainMenu;;
+
+   q|Q) exit;;
+
+   *) echo -e "
+   ${error}${blink}$answer IS A WRONG SELECTION.${resBlink} \n
+   ${info}TRY TO USE:\n
+   ${good}   ${underlined}1 OR U${resUnd}${info} - IF YOU WANT TO UPDATE AND UPGRADE THIS MACHINE
+   ${good}   ${underlined}2 OR C${resUnd}${info} - IF YOU WANT TO CONNECT TO THE ONE OF YOUR SERVERS
+   ${good}   ${underlined}3 OR S${resUnd}${info} - IF YOU WANT TO SETUP YOUR UBUNTU SERVER
+   ${good}   ${underlined}4 OR D${resUnd}${info} - IF YOU WANT TO SETUP YOUR UBUNTU/LINUX MINT DESKTOP/LAPTOP
+   ${good}   ${underlined}5 OR B${resUnd}${info} - IF YOU WANT TO INSTALL SOME BIG OPEN SOURCE PROJECTS";
+   sleep 4;
+   clear -x;
+   mainMenu;;
+   esac
+   done
+}
+
+
+mainMenu(){
+   printMainMenu
+   mainMenuQuestions
 }

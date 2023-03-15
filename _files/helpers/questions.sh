@@ -1,30 +1,29 @@
 #!/usr/bin/bash
-#QUESTIONS
-
+#QUESTIONS AND ASWERS
 
 source ./_files/helpers/colors.sh
-source ./_files/helpers/actions.sh
 
-askUserInput(){
-   read -p "$1" userInput
-   echo $userInput
+
+confirmation(){
+   echo -e "${good} OK GOT IT! Let's $1!${menuItem}"
 }
 
-
-
-responceToChoose(){
-   echo -e "${successAction}YES. Let's $1${information}${reset}"
-   sleep 0.2
+rejection(){
+    echo -e "${error} OK! Let's just skip this step!${menuItem}"
 }
 
-rejectedChoose(){
-   echo -e "${faultAction}NO. Let's just skip this step${reset}"
-   sleep 0.2
+reportOK(){
+   echo -e "${good} GREAT! $1!"
+   sleep 1
 }
 
+provideInfo(){
+   echo -e "${info}$1!"
+   sleep 1
+}
 
 askYesNoQuestion(){
-   echo -e "${question}"
+   echo -e "${choose}"
    while true; do
       read -p "$1" yn
       case $yn in
@@ -33,17 +32,21 @@ askYesNoQuestion(){
          * ) echo "Please answer Y or N.";;
       esac
    done
-   echo -e "${reset}"
 }
 
 askYesNoQuestionWithActions(){
    if askYesNoQuestion "Would you like to $1? [y/n] "; then
-      responceToChoose "$1"
-      sleep 1
+      confirmation "$1"
+      sleep 0.5
       $2
    else
-      rejectedChoose
-      sleep 1
+      rejection
+      sleep 0.5
       $3
    fi
+}
+
+askUserInput(){
+   read -p "$1" ans
+   echo $ans
 }

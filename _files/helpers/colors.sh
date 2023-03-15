@@ -47,17 +47,17 @@ underlined="\e[4m"
 blink="\e[5m"
 resUnd="\e[24m"
 
+mainBG=${GrayDB}${bold}
+menuT=${YellowLT}${underlined}
+frame=${MagentaLT}${BlackB}
+innerBG=${CyanB}
+menuItem=${WhiteLT}
 
-#PRESETS
-frame=${MagentaLT}${bold}${GreenB}${BlackB}
-li=${WhiteLT}${bold}
-olTitle=${YellowLT}${bold}${underlined}
-reserved=${GrayDT}
+RESERVED="${GrayDT}${underlined}X.      RESERVED        ${resUnd}${innerBG}" 
 
-question=${MagentaLT}${bold}
-successAction=${GreenLT}${bold}
-faultAction=${RedLT}${bold}
-information=${YellowT}${bold}
-logInfo=${BlueT}${bold}
-userInput=${CyanLT}${bold}
-serverOutput=${WhiteLT}${bold}
+choose=${MagentaLT}${bold}
+confirmation=${YellowLT}${bold}
+
+error=${RedLT}${bold}
+info=${YellowLT}${bold}
+good=${GreenLT}${bold}

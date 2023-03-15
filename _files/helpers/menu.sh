@@ -1,26 +1,45 @@
-#!/bin/bash
-#MENU SCRIPT
+#!/usr/bin/bash
+#MENU HELPER
 
 source ./_files/helpers/colors.sh
 
-printDefaultMenu7Lines(){
-  clear -x
-   echo -e "${GrayDB}"
-   echo -e "                                                   "
-   echo -e "     ${BlackB}${frame}*****************************************${GrayDB}     "
-   echo -e "     ${BlackB}${frame}**${CyanB}                                     ${frame}**${GrayDB}     "
-   echo -e "     ${BlackB}${frame}**${CyanB}             ${olTitle}$1   ${frame}**${GrayDB}     "
-   echo -e "     ${BlackB}${frame}**${CyanB}                                     ${frame}**${GrayDB}     "
-   echo -e "     ${BlackB}${frame}**${CyanB}    ${li} 1. $2 ${CyanB}       ${frame}**${GrayDB}     "
-   echo -e "     ${BlackB}${frame}**${CyanB}    ${li} 2. $3 ${CyanB}       ${frame}**${GrayDB}     "
-   echo -e "     ${BlackB}${frame}**${CyanB}    ${li} 3. $4 ${CyanB}       ${frame}**${GrayDB}     "
-   echo -e "     ${BlackB}${frame}**${CyanB}    ${li} 4. $5 ${CyanB}       ${frame}**${GrayDB}     "
-   echo -e "     ${BlackB}${frame}**${CyanB}    ${li} 5. $6 ${CyanB}       ${frame}**${GrayDB}     "
-   echo -e "     ${BlackB}${frame}**${CyanB}    ${li} 6. $7 ${CyanB}       ${frame}**${GrayDB}     "
-   echo -e "     ${BlackB}${frame}**${CyanB}    ${li} 7. $8 ${CyanB}       ${frame}**${GrayDB}     "
-   echo -e "     ${BlackB}${frame}**${CyanB}                                     ${frame}**${GrayDB}     "
-   echo -e "     ${BlackB}${frame}*****************************************${GrayDB}     "
-   echo -e "                                                   ${reset}"
-   echo -e "${quest}"
-   sleep 0.1
+
+printEmptyOuterLine(){
+   echo -e "${mainBG}                                                "
+}
+printBorderLine(){
+   echo -e "   ${frame} **************************************** ${mainBG}   "
+}
+printEmptyInnerLine(){
+   echo -e "   ${frame} * ${innerBG}                                    ${frame} * ${mainBG}   "
+}
+printTextLine(){
+   echo -e "   ${frame} * ${innerBG}      ${menuItem}$1      ${frame} * ${mainBG}   "
+}
+
+printMenuTitle(){
+   echo -e "   ${frame} * ${innerBG}           ${menuT}$1${resUnd}${innerBG}          ${frame} * ${mainBG}   "
+}
+
+
+
+printMenu(){
+   clear -x
+   echo
+   printEmptyOuterLine
+   printBorderLine
+   printEmptyInnerLine
+   printMenuTitle "$1"
+   printEmptyInnerLine
+   printTextLine "$2"
+   printTextLine "$3"
+   printTextLine "$4"
+   printTextLine "$5"
+   printTextLine "$6"
+   printTextLine "$7"
+   printTextLine "$8"
+   printEmptyInnerLine
+   printBorderLine
+   printEmptyOuterLine
+   echo -e "${reset}"
 }

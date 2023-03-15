@@ -1,53 +1,109 @@
 #!/usr/bin/bash
-#SERVER MENU MODULE
+#SERVER MENU
 
-source ./_files/helpers/colors.sh
 source ./_files/helpers/menu.sh
-source ./_files/helpers/actions.sh
+source ./_files/helpers/colors.sh
 source ./_files/helpers/questions.sh
+source ./_files/helpers/actions.sh
+source ./_files/modules/Desktop.sh
+source ./_files/modules/Connection.sh
+
+
+menuTitle3="= SERVER MENU ="
+
+menuItem31="1.INSTALL ESSENTIAL SOFT"
+confMI31="install all the essential tools (openssh-server git nano wget tar htop nfs-common gpg)"
+
+menuItem32="2. SETUP NETMAKER SERVER" 
+confMI32="install Netmaker VPN Server"
+
+menuItem33="3. SETUP NGINX SERVER   "
+confMI33="install NginX Server and Netmaker Client"
+
+menuItem34="4. INSTALL DOCKER STACK "
+confMI34="install Docker Stack (Docker, Docker-Compose, NginX, Portainer and Navidrome)"
+
+menuItem35="5. INSTALL NETMAKER CL. "
+confMI35="install Netmaker VPN Client"
+
+menuItem36="6. INSTALL DOCKER-APPS-1"
+confMI36="install Docker Stack Apps 1 kit (Whoogle, Navidrome, WBO, Draw.io)"
 
 
 printServerMenu(){
-   printDefaultMenu7Lines "$mt3" "$mi31" "$mi32" "$mi33" "$mi34" "$mi35" "$mi36" "$mi37"
-   serverMenuQuestions
+   printMenu "${menuTitle3}" "${menuItem31}" "${menuItem32}" "${menuItem33}" "${menuItem34}" "${menuItem35}" "${menuItem36}"  "${RESERVED}"
 }
 
-#CONNECTION MENU TITLE
-mt3="SERVER MENU${resUnd}          "
-#CONNECTION MENU LIST ITEMS
-mi31="COMMON PACKAGES      "
-ansmi31="install common packages (openssh-server git nano wget tar htop nfs-common p7zip-full gpg)"
-mi32="INSTALL NETMAKER SERV"
-ansmi32="install Netmaker VPN Server"
-mi33="INSTALL DOCKER STACK "
-ansmi33="install Docker Stack (Docker, Docker-Compose, NginX, Portainer, Navidrome)"
-mi34="${faultAction}${blink}CONNECT NFS SHARE${resBlink}    "
-ansmi34="connect LAN NFS Share (TrueNas)"
-mi35="INSTALL NETMAKER CL. "
-ansmi35="install Netmaker VPN Client"
-mi36="${GrayT}       RESERVED      "
-mi37="${information}       Q - EXIT      "
-
-
-
-#QUESTIONS BLOCK
 serverMenuQuestions(){
+
    while true
    do
-   echo -e "${question}"
-   read -p " CHOSE THE NEXT ACTION: " answer
+   echo -e "${choose}"
+   read -p " I WOULD LIKE TO: " answer
    case $answer in
-   1|i|I|install|INSTALL) responceToChoose "$ansmi31";sleep 1;generalTools;clear -x;printServerMenu;;
-   2|ns|NS|netmakerserver|NETMAKERSERVER) responceToChoose "$ansmi32";sleep 1;netmakerServer;clear -x;printServerMenu;;
-   3|ds|DS|dockers|DOCKERS) responceToChoose "$ansmi33";sleep 1;dockerStack;clear -x;printServerMenu;;
-   4|nfs|NFS) responceToChoose "$ansmi33";sleep 1;dockerStack;clear -x;printServerMenu;;
-   5|nc|NC) responceToChoose "$ansmi33";sleep 1;netmakerClient;clear -x;printServerMenu;;
-   q|Q) printMainMenu;;
-   *) echo -e "${faultAction}${blink}$answer IS A WRONG SELECTION.${resBlink} \n
-   ${information}TRY TO USE:\n${successAction}   ${underlined}1 (I, INSTALL)${resUnd}${information} - IF YOU WANT TO INSTALL COMMON PACKAGES\n
-${successAction}   ${underlined}2 (NS, NETMAKERSERVER)${resUnd}${information} - IF YOU WANT TO INSTALL NETMAKER VPN SERVER";sleep 3;clear -x;printConnectionMenu;;
+   
+   1|ET|et) 
+   confirmation "$confMI31";
+   wait1; 
+   essentialTools;
+   clear -x; 
+   serverMenu;;
+
+   2|NM|nm)
+   confirmation "$confMI32";
+   wait1;
+   netmakerServer;
+   clear -x;
+   serverMenu;;
+
+   3|NX|nx) 
+   confirmation "$confMI33";
+   wait1;
+   setupNginx;
+   clear -x;
+   serverMenu;;
+
+   4|D|d)
+   confirmation "$confMI34";
+   wait1;
+   dockerStack;
+   clear -x;
+   serverMenu;;
+
+   5|NC|nc)
+   confirmation "$confMI35";
+   wait1;
+   netmakerClient;
+   clear -x;
+   serverMenu;;
+
+   6|DA|da)
+   confirmation "$confMI36";
+   wait1;
+   dockerAppsStack1;
+   clear -x;
+   serverMenu;;
+
+   q|Q) exit;;
+
+   *) echo -e "
+   ${error}${blink}$answer IS A WRONG SELECTION.${resBlink} \n
+   ${info}TRY TO USE:\n
+   ${good}   ${underlined}1 OR ET${resUnd}${info} - IF YOU WANT TO INSTAL ESSENTIAL TOOLS
+   ${good}   ${underlined}2 OR NM${resUnd}${info} - IF YOU WANT TO SETUP NETMAKER SERVER
+   ${good}   ${underlined}3 OR NX${resUnd}${info} - IF YOU WANT TO SETUP NGINX SERVER
+   ${good}   ${underlined}4 OR D${resUnd}${info} - IF YOU WANT TO INSTALL DOCKER STACK
+   ${good}   ${underlined}5 OR NC${resUnd}${info} - IF YOU WANT TO INSTALL NETMAKET CLIENT
+   ${good}   ${underlined}6 OR DA${resUnd}${info} - IF YOU WANT TO INSTALL DOCKER APPS STACK";
+   sleep 4;
+   clear -x;
+   serverMenu;;
    esac
    done
-
 }
 
+
+serverMenu(){
+   printServerMenu
+   serverMenuQuestions
+}

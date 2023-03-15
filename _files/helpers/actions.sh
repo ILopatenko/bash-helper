@@ -1,42 +1,100 @@
 #!/usr/bin/bash
 #ACTIONS
+source ./_files/helpers/questions.sh
+source ./_files/helpers/fstab.sh
+#source ./_files/modules/Desktop.sh
 
-source ./_files/helpers/colors.sh
 
 
+wait1(){
+   sleep 1
+}
 
 updateUpgrade(){
    sudo apt update && sudo apt upgrade -y
-   sleep 0.5
-   echo -e "${successAction}OK. The task to update and upgrade your system was done!"
-   sleep 1.5
+   reportOK "Your OS was updated and upgraded"
+}
+
+essentialTools(){
+   sudo apt install openssh-server git nano wget tar htop nfs-common gpg -y
+   reportOK "All the essential tool for the server were installed"
+}
+
+desktopTools(){
+   sudo apt install openssh-server git nano wget tar htop nfs-common gpg audacious qbittorrent -y
+   reportOK "All the essential tool for the desktop were installed"
+}
+
+bigSoft(){
+   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+   sudo dpkg -i google-chrome-stable_current_amd64.deb
+   sudo apt install -f
+   rm google-chrome-stable_current_amd64.deb
+
+   wget https://az764295.vo.msecnd.net/stable/5e805b79fcb6ba4c2d23712967df89a089da575b/code_1.76.1-1678294265_amd64.deb
+   sudo dpkg -i code_1.76.1-1678294265_amd64.deb
+   sudo apt install -f
+   rm code_1.76.1-1678294265_amd64.deb
+
+   wget https://zoom.us/client/5.13.11.1288/zoom_amd64.deb
+   sudo dpkg -i zoom_amd64.deb
+   sudo apt install -f
+   rm zoom_amd64.deb
+
+   wget https://downloads.slack-edge.com/releases/linux/4.29.149/prod/x64/slack-desktop-4.29.149-amd64.deb
+   sudo dpkg -i slack-desktop-4.29.149-amd64.deb
+   sudo apt install -f
+   rm slack-desktop-4.29.149-amd64.deb
+
+   sudo curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && sudo apt-get install -y nodejs
+
+   sudo add-apt-repository ppa:thopiekar/openrgb -y && sudo apt update && sudo apt install openrgb -y
 }
 
 
-connectToServer(){
-   echo -e "${serverOutput}"
-   ssh -t -i -o StrictHostKeyChecking=no $1@$2 $3
+netmakerClient(){
+   sudo curl -sL 'https://apt.netmaker.org/gpg.key' | sudo tee /etc/apt/trusted.gpg.d/netclient.asc
+   sudo curl -sL 'https://apt.netmaker.org/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/netclient.list
+   sudo apt update
+   sudo sudo apt install netclient -y
+   sudo ip -br -c a
 }
 
-connectToProxmoxFirst(){
-   echo -e "${serverOutput}"
-   command='sudo apt update && sudo apt upgrade -y && sudo apt install git && git clone https://github.com/ilopatenko/bash-helper && sudo reboot'
-   connectToServer "test" "$1" "$command"
+netmakerServer(){
+   sudo wget -qO /root/nm-quick-interactive.sh https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick-interactive.sh && sudo chmod +x /root/nm-quick-interactive.sh && sudo /root/nm-quick-interactive.sh
 }
 
-connectOracle(){
-   path="/home/$USER/Storage/ssdIT/_SSH-keys/myOracle/$1/"
-   keyName=$(find $path -name "*.key")
-   chmod 400 $keyName
-   serverIP=$(cat $path/ip.txt)
-   clear -x
-   echo -e "${faultAction}If it is your first connection please create a SWAP, and other funny things using this command:"
-   echo -e "sudo -i"
-   echo -e "fallocate -l 2048M /root/swapfile && ls -lh /root/swapfile && chmod 600 /root/swapfile && mkswap /root/swapfile && swapon /root/swapfile && echo '/root/swapfile none swap sw 0 0' >> /etc/fstab && apt update && apt upgrade -y && apt install git -y && exit"
-   echo -e "git clone https://github.com/ilopatenko/bash-helper && sudo reboot"
-   echo -e "${serverOutput}"
-   sleep 2
-   ssh -o StrictHostKeyChecking=no -i $keyName ubuntu@$serverIP
+dockerStack(){
+   wget https://gitlab.com/bmcgonag/docker_installs/-/raw/main/install_docker_nproxyman.sh
+   chmod +X install_docker_nproxyman.sh
+   bash install_docker_nproxyman.sh
+   sudo rm install_docker_nproxyman.sh
+}
+
+
+
+
+checkIfCurrentUserIsNotRoot(){
+   if [[ $(whoami) == 'root' ]]; then
+      return 1
+   else
+      return 0
+   fi
+}
+
+rootRule(){
+   if checkIfCurrentUserIsRoot; then
+      $1
+   else
+      $2
+   fi
+}
+
+dockerAppsStack1(){
+   mkdir -p ~/docker-apps-stack/wbo/wbo-boards
+   cp ./_files/docker-apps/docker-apps-stack/x-all/docker-compose.yml ../../docker-apps-stack
+   cd ../../docker-apps-stack
+   sudo docker-compose up -d
 }
 
 
@@ -49,29 +107,4 @@ installGitLabServer(){
   sudo apt-get install -y curl openssh-server ca-certificates tzdata perl
   curl -s https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo os=ubuntu dist=trusty bash
   sudo EXTERNAL_URL="$host" apt-get install gitlab-ce
-}
-
-
-generalTools(){
-   sudo apt install openssh-server git nano wget tar htop nfs-common p7zip-full gpg -y
-}
-
-dockerStack(){
-   wget https://gitlab.com/bmcgonag/docker_installs/-/raw/main/install_docker_nproxyman.sh
-   chmod +X install_docker_nproxyman.sh
-   bash install_docker_nproxyman.sh
-   sudo rm install_docker_nproxyman.sh
-}
-
-
-netmakerServer(){
-   sudo wget -qO /root/nm-quick-interactive.sh https://raw.githubusercontent.com/gravitl/netmaker/master/scripts/nm-quick-interactive.sh && sudo chmod +x /root/nm-quick-interactive.sh && sudo /root/nm-quick-interactive.sh
-}
-
-netmakerClient(){
-   sudo curl -sL 'https://apt.netmaker.org/gpg.key' | sudo tee /etc/apt/trusted.gpg.d/netclient.asc
-   sudo curl -sL 'https://apt.netmaker.org/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/netclient.list
-   sudo apt update
-   sudo sudo apt install netclient -y
-   sudo ip -br -c a
 }
