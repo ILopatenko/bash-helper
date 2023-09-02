@@ -1,9 +1,12 @@
 #!/bin/bash
 # UI MENU HELPER
-source ../helpers/colors.sh
+source ./_files/pages/ErrorPagesWithExplanation.sh
+
+source ./_files/helpers/colors.sh
+source ./_files/helpers/actions.sh
 
 
-backgroundWidth=71
+backgroundWidth=67
 backgroundTopBottomGap=1
 backgroundLeftGap=2
 menuOuterGap=5
@@ -21,6 +24,44 @@ itemStyle=$grayTCDalmostWhite$boldTE$menuBackground
 reservedStyle=$blackTCD$boldTE$menuBackground
 thisFeatureIsInDevelopment="THIS FEATURE IS IN DEVELOPMENT"
 
+cliQuestionStyle=$boldTE$blackTCD$yellowTCD
+questionCLI="          PLEASE SELECT THE NEXT ACTION (1-9): "
+#!/bin/bash
+# THIS FEATURE IS IN DEVELOPMENT PAGE
+
+printWrongSelectionPage(){
+   PageComponent \
+      false \
+      false \
+      "UNFOURTINATELY $1" \
+      false \
+      "IS A WRONG SELECTION" \
+      false \
+      "PLEASE SELECT ANOTHER VARIANT!" \
+      false \
+      false \
+      false \
+      "*!PREVIOUS MENU WILL BE LOADED IN 2 SECONDS!*"
+      
+      sleep 1
+}
+
+printInDevelopmentPage(){
+   PageComponent \
+      false \
+      false \
+      "UNFOURTINATELY AT THE MOMENT" \
+      false \
+      "THIS FEATURE IS IN DEVELOPMENT" \
+      false \
+      "PLEASE SELECT ANOTHER VARIANT!" \
+      false \
+      false \
+      false \
+      "*!PREVIOUS MENU WILL BE LOADED IN 2 SECONDS!*"
+      
+      sleep 1
+}
 
 printBackgroundTopBottomGap(){
    for ((i = 0 ; i < $backgroundTopBottomGap ; i++)); do
@@ -100,18 +141,28 @@ printMenuLineReserved(){
    printMenuLineWithContent "$1" "$thisFeatureIsInDevelopment" "reserved"
 }
 
-
-
-MenuComponent(){
-   params=("$@")
-   clear -x
+printTopMenuPart(){
    printBackgroundTopBottomGap
    printEmptyBackgroundLine
    printEmptyBackgroundLine
    printBorderMenuLine
    printEmptyMenuLine
-   
+}
+
+printBottomMenuPart(){
+   printEmptyMenuLine
+   printBorderMenuLine
+   printEmptyBackgroundLine
+   printEmptyBackgroundLine
+}
+
+
+MenuComponent(){
+   params=("$@")
+   clear -x
+   printTopMenuPart
    printMenuLineTitle "${params[-2]}" "${params[-1]}"
+   printEmptyMenuLine
    for ((i = 1 ; i < ${#params[@]}-1 ; i++)); do
       if [[ ${params[$i-1]} == "false" ]]; then
          printMenuLineReserved "${params[-2]}.$i"
@@ -119,66 +170,53 @@ MenuComponent(){
          printMenuLineItem "${params[-2]}.$i" "${params[$i-1]}"
       fi
    done
-   printEmptyMenuLine
-   printBorderMenuLine
-   printEmptyBackgroundLine
-   printEmptyBackgroundLine
-   printBackgroundTopBottomGap
+   printBottomMenuPart
 }
 
 
 
 
 PageComponent(){
+   params=("$@")
    clear -x
-   printBackgroundTopBottomGap
-   printEmptyBackgroundLine
-   printEmptyBackgroundLine
-   printBorderMenuLine
-   printEmptyMenuLine
-   printMenuLineItem "" "$1" 
-   printMenuLineItem "" "$2" 
-   printMenuLineItem "" "$3" 
-   printMenuLineItem "" "$4" 
-   printMenuLineItem "" "$5" 
-   printMenuLineItem "" "$6" 
-   printMenuLineItem "" "$7" 
-   printMenuLineItem "" "$8" 
-   printMenuLineItem "" "$9" 
-   printMenuLineItem "" "${10}" 
-   printMenuLineItem "" "${11}" 
-   printMenuLineItem "" "${12}" 
-   printEmptyMenuLine
-   printBorderMenuLine
-   printEmptyBackgroundLine
-   printEmptyBackgroundLine
-   printBackgroundTopBottomGap
-
+   printTopMenuPart
+   for ((i = 1 ; i < ${#params[@]}+1 ; i++)); do
+      if [[ ${params[$i-1]} == "false" ]]; then
+         printEmptyMenuLine
+      else
+         printMenuLineItem "${params[$i-1]}"
+      fi
+   done
+   printBottomMenuPart
+   sleep 1
 }
 
 
-MenuComponent \
-"MENU ITEM #1" \
-"MENU ITEM #2" \
-"MENU ITEM #3qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq" \
-"MENU ITEM #4" \
-"MENU ITEM #5" \
-"MENU ITEM #6" \
-false \
-false \
-false \
-"6" \
-"MENU TITLE11111111111111111111111111111111111111111111111111111111"
 
-PageComponent \
-"THIS IS A CONTERNT FOR LINE #1" \
-"" \
-"THIS IS A CONTERNT FOR LINE #2" \
-"" \
-"" \
-"" \
-"THIS IS A CONTERNT FOR LINE #4" \
-"" \
-"THIS IS A CONTERNT FOR LINE #5" \
-"THIS IS A CONTERNT FOR LINE #6" \
-"THIS IS A CONTERNT FOR LINE #7" \
+
+CLIselector(){
+   echo -e "$cliQuestionStyle"
+   read -p "$questionCLI" ans
+   echo -e "$dropAllEffects"
+      case $ans in
+        1) $1;${12};;
+        2) $2;${12};;
+        3) $3;${12};;
+        4) $4;${12};;
+        5) $5;${12};;
+        6) $6;${12};;
+        7) $7;${12};;
+        8) $8;${12};;
+        9) $9;${12};;
+        q) ${10};;
+        *) ${11} "$ans";${12};;
+      esac
+}
+
+
+
+
+
+
+
+

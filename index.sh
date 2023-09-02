@@ -1,4 +1,8 @@
 #!/bin/bash
 #INDEX
 
-echo "hello"
+source ./_files/components/MainMenu.sh
+source ./_files/pages/PagesWithAdditionalInformation.sh
+
+printGreetingPage
+MainMenu
