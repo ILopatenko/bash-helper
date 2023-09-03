@@ -25,3 +25,13 @@ installDockerStack(){
 
 
 
+
+
+
+#FOR CONNECT MENU
+connectToLanProxmoxServer(){
+   clear -x
+   read -p "PLEASE ENTER THE LAST PART OF THE LAN PROXMOX SERVER: 3.3.3." ip
+   ssh -i /home/slon/Storage/r4ter-it/_SSH-keys/lan/slon-pm/slon-pm -o StrictHostKeyChecking=no slon@3.3.3.$ip
+}
+
