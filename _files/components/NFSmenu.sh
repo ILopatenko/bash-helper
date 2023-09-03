@@ -1,36 +1,34 @@
 #!/bin/bash
-# SERVER MENU
+# NFS MENU
 source ./_files/helpers/menu.sh
 source ./_files/helpers/actions.sh
-source ./_files/components/NFSmenu.sh
 
 
-MT1="SERVER MENU"
-MI11="UPDATE AND UPGRADE THIS NEW UBUNTU SERVER"
-MI12="INSTALL INITIAL SERVER SOFT"
-MI13="CONNECT LAN NFS SHARES"
-MI14="INSTALL DOCKER STACK"
+MT10="NFS MENU"
+MI101="CONNECT ALL THE SHARES (DELL + RYZEN)"
+MI102="CONNECT ALL THE DELL SHARES"
+MI103="CONNECT ALL THE RYZEN SHARES"
 
 
-ServerMenu(){
+NFSmenu(){
 
    MenuComponent \
-   "$MI11" \
-   "$MI12" \
-   "$MI13" \
+   "$MI101" \
+   "$MI102" \
+   "$MI103" \
    false \
    false \
    false \
    false \
    false \
    false \
-   "1" \
-   "$MT1"
+   "10" \
+   "$MT10"
 
    CLIselector \
-   updateUpgradeUbuntu \
-   installInitialServerSoft \
-   NFSmenu \
+   connectAllNfsShares \
+   printInDevelopmentPage \
+   printInDevelopmentPage \
    printInDevelopmentPage \
    printInDevelopmentPage \
    printInDevelopmentPage \
@@ -39,6 +37,6 @@ ServerMenu(){
    printInDevelopmentPage \
    MainMenu \
    printWrongSelectionPage \
-   ServerMenu
+   NFSmenu
 }
 
