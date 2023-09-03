@@ -37,7 +37,7 @@ NFSmenu(){
    connectSsdMediaDellShare \
    connectR2TerShareRyzenShare \
    connectR2TerMediaRyzenShare \
-   printInDevelopmentPage \
+   connectR4TerItRyzenShare \
    printInDevelopmentPage \
    MainMenu \
    printWrongSelectionPage \
