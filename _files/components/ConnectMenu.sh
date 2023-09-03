@@ -4,18 +4,17 @@ source ./_files/helpers/menu.sh
 source ./_files/helpers/actions.sh
 
 
-MT8="CONNECT MENU"
-MI81="CONNECT TO ONE OF MY LAN PROXMOX SERVERS"
-MI82="CONNECT TO MY ORACLE SERVER (NGINX)"
-MI83="CONNECT TO MY ORACLE SERVER (NETMAKER)"
+MI_8_1="CONNECT TO ONE OF MY LAN PROXMOX SERVERS"
+MI_8_2="CONNECT TO MY ORACLE SERVER (NGINX)"
+MI_8_3="CONNECT TO MY ORACLE SERVER (NETMAKER)"
 
 
 ConnectMenu(){
 
    MenuComponent \
-   "$MI81" \
-   "$MI82" \
-   "$MI83" \
+   "$MI_8_1" \
+   "$MI_8_2" \
+   "$MI_8_3" \
    false \
    false \
    false \
@@ -23,7 +22,7 @@ ConnectMenu(){
    false \
    false \
    "8" \
-   "$MT8"
+   "$MT_8"
 
    CLIselector \
    connectToLanProxmoxServer \

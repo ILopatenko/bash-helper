@@ -5,19 +5,18 @@ source ./_files/helpers/actions.sh
 source ./_files/components/NFSmenu.sh
 
 
-MT1="SERVER MENU"
-MI11="UPDATE AND UPGRADE THIS NEW UBUNTU SERVER"
-MI12="INSTALL INITIAL SERVER SOFT"
-MI13="CONNECT LAN NFS SHARES"
-MI14="INSTALL DOCKER STACK"
+MI_1_1="UPDATE AND UPGRADE THIS NEW UBUNTU SERVER"
+MI_1_2="INSTALL INITIAL SERVER SOFT"
+MI_1_3="CONNECT LAN NFS SHARES"
+MI_1_4="INSTALL DOCKER STACK"
 
 
 ServerMenu(){
 
    MenuComponent \
-   "$MI11" \
-   "$MI12" \
-   "$MI13" \
+   "$MI_1_1" \
+   "$MI_1_2" \
+   "$MI_1_3" \
    false \
    false \
    false \
@@ -25,7 +24,7 @@ ServerMenu(){
    false \
    false \
    "1" \
-   "$MT1"
+   "$MT_1"
 
    CLIselector \
    updateUpgradeUbuntu \

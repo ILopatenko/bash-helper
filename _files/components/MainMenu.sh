@@ -3,33 +3,35 @@
 source ./_files/helpers/menu.sh
 source ./_files/components/ServerMenu.sh
 source ./_files/components/ConnectMenu.sh
+source ./_files/components/NFSmenu.sh
 
 
 
 
 
-MT0="MAIN MENU"
-MI01="SETUP A NEW UBUNTU SERVER"
-MI02="SETUP A NEW UBUNTU DESKTOP/LAPTOP"
-MI03="SETUP A NEW ORACLE SERVER"
+MT_0="MAIN MENU"
+MT_1="SETUP A NEW UBUNTU SERVER"
+MT_2="SETUP A NEW UBUNTU DESKTOP/LAPTOP"
+MT_3="SETUP A NEW ORACLE SERVER"
 
-MI08="CONNECT (SSH) TO A SERVER"
+MT_8="CONNECT (SSH) TO A SERVER"
+MT_9="CONNECT LAN NFS SHARES"
 
 
 MainMenu(){
 
    MenuComponent \
-   "$MI01" \
-   "$MI02" \
-   "$MI03" \
+   "$MT_1" \
+   "$MT_2" \
+   "$MT_3" \
    false \
    false \
    false \
    false \
-   "$MI08" \
-   false \
+   "$MT_8" \
+   "$MT_9" \
    "0" \
-   "$MT0"
+   "$MT_0"
 
    CLIselector \
    ServerMenu \
@@ -40,7 +42,7 @@ MainMenu(){
    printInDevelopmentPage \
    printInDevelopmentPage \
    ConnectMenu \
-   printInDevelopmentPage \
+   NFSmenu \
    printPreExitPage \
    printWrongSelectionPage \
    MainMenu

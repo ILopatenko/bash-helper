@@ -104,3 +104,31 @@ connectNFS(){
 connectAllNfsShares(){
    connectNFS "ssd-it" "ssd-media" "r2ter-share" "r2ter-media" "r4ter-it"
 }
+
+connectAllDellShares(){
+   connectNFS "ssd-it" "ssd-media"
+}
+
+connectAllRyzenShares(){
+   connectNFS "r2ter-share" "r2ter-media" "r4ter-it"
+}
+
+connectSsdItDellShare(){
+   connectNFS "ssd-it"
+}
+
+connectSsdMediaDellShare(){
+   connectNFS "ssd-media"
+}
+
+connectR2TerShareRyzenShare(){
+   connectNFS "r2ter-share"
+}
+
+connectR2TerMediaRyzenShare(){
+   connectNFS "r2ter-media"
+}
+
+connectR4TerItRyzenShare(){
+   connectNFS "r4ter-it"
+}

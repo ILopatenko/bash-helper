@@ -4,35 +4,39 @@ source ./_files/helpers/menu.sh
 source ./_files/helpers/actions.sh
 
 
-MT10="NFS MENU"
-MI101="CONNECT ALL THE SHARES (DELL + RYZEN)"
-MI102="CONNECT ALL THE DELL SHARES"
-MI103="CONNECT ALL THE RYZEN SHARES"
+MI_9_1="CONNECT ALL THE SHARES (DELL + RYZEN)"
+MI_9_2="CONNECT ALL THE DELL SHARES"
+MI_9_3="CONNECT ALL THE RYZEN SHARES"
+MI_9_4="CONNECT SSD-IT DELL SHARE"
+MI_9_5="CONNECT SSD-MEDIA DELL SHARE"
+MI_9_6="CONNECT R2TER-SHARE RYZEN SHARE"
+MI_9_7="CONNECT R2TER-MEDIA RYZEN SHARE"
+MI_9_8="CONNECT R2TER-IT RYZEN SHARE"
 
 
 NFSmenu(){
 
    MenuComponent \
-   "$MI101" \
-   "$MI102" \
-   "$MI103" \
+   "$MI_9_1" \
+   "$MI_9_2" \
+   "$MI_9_3" \
+   "$MI_9_4" \
+   "$MI_9_5" \
+   "$MI_9_6" \
+   "$MI_9_7" \
+   "$MI_9_8" \
    false \
-   false \
-   false \
-   false \
-   false \
-   false \
-   "10" \
-   "$MT10"
+   "9" \
+   "$MT_9"
 
    CLIselector \
    connectAllNfsShares \
-   printInDevelopmentPage \
-   printInDevelopmentPage \
-   printInDevelopmentPage \
-   printInDevelopmentPage \
-   printInDevelopmentPage \
-   printInDevelopmentPage \
+   connectAllDellShares \
+   connectAllRyzenShares \
+   connectSsdItDellShare \
+   connectSsdMediaDellShare \
+   connectR2TerShareRyzenShare \
+   connectR2TerMediaRyzenShare \
    printInDevelopmentPage \
    printInDevelopmentPage \
    MainMenu \
