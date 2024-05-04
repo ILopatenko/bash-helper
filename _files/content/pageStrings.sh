@@ -6,14 +6,14 @@ welcomePageContent=(
    ""
    "HI THERE" 
    "THIS IS A BASH HELPER SCRIPT"
-  
+)
 
+inDevelopmentPageContent=(
+   ""
+   ""
+   "THIS FEATURE IS IN DEVELOPMENT!" 
+   "THANKS!"
 )
 
 
 
-
-#FOR ACTIONS
-updateUpgradeSystemPageHintInProgress="WE ARE UPDATING AND UPGRADING YOUR SYSTEM"
-
-updateUpgradeSystemPageHintFinished="WE HAVE UPDATED AND UPGRADED YOUR SYSTEM"

@@ -9,11 +9,18 @@ source ./_files/content/pageStrings.sh
 ##MENUS
 
 renderMainMenu(){
+   activeItem=1
    MenuUIcomponent "${mainMenuContent[@]}"
 }
 
 renderUbuntuServerMenu(){
+   activeItem=1
    MenuUIcomponent "${setupNewUbuntuServerMenu[@]}"
+}
+
+renderUbuntuDesktopMenu(){
+   activeItem=1
+   MenuUIcomponent "${setupNewUbuntuDesktopMenu[@]}"
 }
 
 
@@ -24,5 +31,10 @@ renderUbuntuServerMenu(){
 ##PAGES
 renderWelcomePage(){
    PageComponent "${welcomePageContent[@]}"
+   sleep $delayForPages
+}
+
+renderInDevelopmentPage(){
+   PageComponent "${inDevelopmentPageContent[@]}"
    sleep $delayForPages
 }

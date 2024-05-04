@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ./_files/helpers/colors.sh
-source ./_files/actions/actionHandlers.sh
+source ./_files/actions/commands.sh
 
 
 
@@ -243,7 +243,7 @@ sayHi(){
 MenuUIcomponent(){
    clear -x
    local localMenuItems=("$@")
-
+   
    rerenderMenu(){
       MenuUIcomponent "${localMenuItems[@]}"
    }

@@ -15,12 +15,12 @@ mainMenuContent=(
    
    
    renderUbuntuServerMenu
-   sayHi
-   sayHello
-   sayHi
-   sayHello
-   sayHi
-   sayHello
+   renderUbuntuDesktopMenu
+   renderInDevelopmentPage
+   renderInDevelopmentPage
+   renderInDevelopmentPage
+   renderInDevelopmentPage
+   renderInDevelopmentPage
 
    exitPage
 )
@@ -30,20 +30,43 @@ setupNewUbuntuServerMenu=(
    "SETUP A NEW UBUNTU SERVER"
 
    "UPDATE AND UPGRADE YOUR SYSTEM"
-   "INSTALL INITIAL SOFT"
-   "INSTALL ADDITIONAL SOFT"
+   "INSTALL INITIAL SERVER SOFT"
+   "INSTALL NODEJS"
    "INSTALL DOCKER AND DOCKER STACK"
-   "IN DEVELOPNET"
+   "INSTALL DOCKER"
    "IN DEVELOPNET"
    "IN DEVELOPNET"
 
-   updateUpgradeSystemHandler
-   sayHi
-   sayHello
-   sayHi
-   sayHello
-   sayHi
-   sayHello
+   updateUpgradeSystemCommand
+   installInitialServerSoftCommand
+   installNodejsCommand
+   installDockerStackCommand
+   installDockerCommand
+   renderInDevelopmentPage
+   renderInDevelopmentPage
+
+   renderMainMenu
+
+)
+
+setupNewUbuntuDesktopMenu=(
+   "SETUP A NEW UBUNTU DESKTOP/LAPTOP"
+
+   "UPDATE AND UPGRADE YOUR SYSTEM"
+   "INSTALL INITIAL DESCKTOP SOFT"
+   "INSTALL VSC, ZOOM, SLACK, NODEJS, CHROME"
+   "INSTALL DOCKER AND DOCKER STACK"
+   "INSTALL DOCKER"
+   "IN DEVELOPNET"
+   "IN DEVELOPNET"
+
+   updateUpgradeSystemCommand
+   installInitialDesktopSoftCommand
+   installBigSoft
+   installDockerStackCommand
+   installDockerCommand
+   renderInDevelopmentPage
+   renderInDevelopmentPage
 
    renderMainMenu
 
