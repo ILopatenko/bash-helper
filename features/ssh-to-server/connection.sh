@@ -160,19 +160,20 @@ prepareConnection(){
    else
       echo '   NO. Private Key is not ready. I am going to change the permission'
       sleep 0.5
+      changePermission 400 $oracleDefaultPath$oracleDefaultKey
+
+      if [[  $(checkFilePermission $oracleDefaultPath$oracleDefaultKey 400) == 'PASS' ]]; then
+         echo '   YES. I changed the permission'
+         sleep 0.5
+      else
+         echo '   NO. I can not change the permission. Bye!'
+         sleep 0.5
+         exit
+      fi
    fi
 
 
-   changePermission 400 $oracleDefaultPath$oracleDefaultKey
-
-   if [[  $(checkFilePermission $oracleDefaultPath$oracleDefaultKey 400) == 'PASS' ]]; then
-      echo '   YES. I changed the permission'
-      sleep 0.5
-   else
-      echo '   NO. I can not change the permission. Bye!'
-      sleep 0.5
-      exit
-   fi
+   
 
    sleep 0.5
    clear -x
@@ -214,9 +215,9 @@ connectionToOracleDockerStackInstallReboot(){
 
 fullProccess(){
    connectionToOracleUpdateUpgrateReboot
-   sleep 60
+   sleep 100
    connectionToOracleDockerInstallReboot
-   sleep 60
+   sleep 100
    connectionToOracleDockerStackInstallReboot
    sleep 60
    connectionToOracle
@@ -225,7 +226,7 @@ fullProccess(){
 
 
 
-connectionToOracle
+connectionToOracleUpdateUpgrateReboot
 
 
 ###PLAN:
