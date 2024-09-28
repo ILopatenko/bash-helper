@@ -226,7 +226,7 @@ fullProccess(){
 
 
 
-connectionToOracleUpdateUpgrateReboot
+connectionToOracle
 
 
 ###PLAN:
