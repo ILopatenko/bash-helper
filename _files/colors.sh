@@ -1,5 +1,4 @@
 #!/bin/bash
-# COLORS HELPER
 
 dropAllEffects="\e[0m"
 
